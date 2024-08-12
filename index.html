@@ -15,6 +15,10 @@
                 maxZoom: 19,
             }).addTo(map);
 
+            // Variables to store the clicked countries
+            var country1 = null;
+            var country2 = null;
+
             // Load GeoJSON data for countries
             fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
                 .then(response => response.json())
@@ -22,7 +26,20 @@
                     L.geoJSON(data, {
                         onEachFeature: function (feature, layer) {
                             layer.on('click', function () {
-                                alert('You clicked on ' + feature.properties.ADMIN);
+                                if (!country1) {
+                                    country1 = feature.properties.ADMIN;
+                                    alert('You clicked on ' + country1 + '. Now click on another country.');
+                                } else if (!country2) {
+                                    country2 = feature.properties.ADMIN;
+                                    alert('You clicked on ' + country2 + '.');
+                                    // Both countries have been selected; now do something with the data
+                                    console.log('Country 1:', country1);
+                                    console.log('Country 2:', country2);
+
+                                    // Reset the variables for another round of selection if needed
+                                    country1 = null;
+                                    country2 = null;
+                                }
                             });
                         }
                     }).addTo(map);
@@ -30,4 +47,3 @@
         </script>
     </body>
 </html>
-
