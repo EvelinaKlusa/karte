@@ -5,25 +5,36 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
-        /* Set the map container to fill the entire screen */
-        html, body, #map {
+        /* Ensure the body takes up the full height */
+        html, body {
             height: 100%;
-            width: 100%;
             margin: 0;
             padding: 0;
-        }
-        /* Ensure the body takes up the full height to remove the gap */
-        body {
             display: flex;
-            flex-direction: column;
+            justify-content: flex-start; /* Align content to the left */
+            align-items: center; /* Center content vertically */
         }
+
+        /* Style the container that holds the map */
+        .map-container {
+            border: 5px solid #333; /* Set border color and width */
+            width: 70%; /* Set the width of the map container */
+            height: 70vh; /* Set the height of the map container */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a shadow for a nice effect */
+            margin-left: 20px; /* Add some margin to the left of the page */
+        }
+
+        /* Set the map container to fill the available space within the frame */
         #map {
-            flex: 1;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <div id="map"></div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
     <script>
         // Initialize the map and set view
         var map = L.map('map').setView([20, 0], 2);
