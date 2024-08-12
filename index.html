@@ -17,9 +17,10 @@
         /* Style the container that holds the map */
         .map-container {
             border: 5px solid #333; /* Set border color and width */
-            width: 100vw; /* Full viewport width */
-            height: 100vh; /* Full viewport height */
+            width: 900px; /* Increased width to better fit the map */
+            height: 600px; /* Increased height to better fit the map */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a shadow for a nice effect */
+            margin: 20px; /* Add some margin for better spacing */
             background-color: white; /* Background color to ensure visibility */
         }
 
@@ -36,9 +37,7 @@
     </div>
     <script>
         // Initialize the map and set view
-        var map = L.map('map', {
-            zoomSnap: 0.25, // Allow finer zoom levels
-        }).setView([20, 0], 2.5); // Adjust zoom level to fit the map in the frame
+        var map = L.map('map').setView([20, 0], 2);
 
         // Set maximum bounds to limit the viewable area to the world map
         var bounds = [[-60, -180], [85, 180]];
@@ -50,7 +49,7 @@
         // Load and display tiles (e.g., OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 5, // Limit maximum zoom level to keep map within bounds
-            minZoom: 2.5, // Adjust minimum zoom level to fit the map in the frame
+            minZoom: 2,
             noWrap: true  // Prevent the map from wrapping horizontally
         }).addTo(map);
 
