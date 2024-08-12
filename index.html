@@ -8,21 +8,37 @@
         /* Set the map container to fill the entire screen */
         html, body, #map {
             height: 100%;
+            width: 100%;
             margin: 0;
             padding: 0;
+        }
+        /* Ensure the body takes up the full height to remove the gap */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        #map {
+            flex: 1;
         }
     </style>
 </head>
 <body>
     <div id="map"></div>
     <script>
-        // Initialize the map
+        // Initialize the map and set view
         var map = L.map('map').setView([20, 0], 2);
+
+        // Set maximum bounds to limit the viewable area to the world map
+        var bounds = [[-60, -180], [85, 180]];
+        map.setMaxBounds(bounds);
+        map.on('drag', function() {
+            map.panInsideBounds(bounds, { animate: false });
+        });
 
         // Load and display tiles (e.g., OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            minZoom: 2,  // Set the minimum zoom level to prevent zooming out too far
+            maxZoom: 5, // Limit maximum zoom level to keep map within bounds
+            minZoom: 2,
             noWrap: true  // Prevent the map from wrapping horizontally
         }).addTo(map);
 
