@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     </head>
     <body>
         <div id="map" style="height: 500px;"></div>
         <script>
-    // Initialize the map
-    var map = L.map('map').setView([20, 0], 2);
+            // Initialize the map
+            var map = L.map('map').setView([20, 0], 2);
 
-    // Load and display tiles (e.g., OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-    }).addTo(map);
-
-    // Load GeoJSON data for countries
-    fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
-        .then(response => response.json())
-        .then(data => {
-            L.geoJSON(data, {
-                onEachFeature: function (feature, layer) {
-                    layer.on('click', function () {
-                        alert('You clicked on ' + feature.properties.ADMIN);
-                    });
-                }
+            // Load and display tiles (e.g., OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
             }).addTo(map);
-        });
-</script>
 
+            // Load GeoJSON data for countries
+            fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+                .then(response => response.json())
+                .then(data => {
+                    L.geoJSON(data, {
+                        onEachFeature: function (feature, layer) {
+                            layer.on('click', function () {
+                                alert('You clicked on ' + feature.properties.ADMIN);
+                            });
+                        }
+                    }).addTo(map);
+                });
+        </script>
     </body>
 </html>
+
