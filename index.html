@@ -42,6 +42,12 @@
             noWrap: true  // Prevent the map from wrapping horizontally
         }).addTo(map);
 
+        // Restrict zooming beyond the initial bounds
+        map.on('zoomend', function() {
+            if (map.getZoom() < map.getMinZoom()) map.setZoom(map.getMinZoom());
+            if (map.getZoom() > map.getMaxZoom()) map.setZoom(map.getMaxZoom());
+        });
+
         // Variables to store the clicked countries
         var country1 = null;
         var country2 = null;
